@@ -1,10 +1,12 @@
 <template>
   <div>
-    <navbar></navbar>
-    <br/>
-    <b-container fluid>
-      <router-view />
-    </b-container>
+    <b-overlay :show="show" rounded="sm">
+      <navbar></navbar>
+      <br />
+      <b-container fluid>
+        <router-view />
+      </b-container>
+    </b-overlay>
   </div>
 </template>
 
@@ -15,6 +17,11 @@ export default {
   name: "App",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      show: false,
+    };
   },
 };
 </script>
