@@ -1,9 +1,9 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run development",
+        "dev": "NODE_ENV=development ENV_FILE=./.env npm run development",
         "development": "mix",
-        "watch": "mix watch",
+        "watch": "NODE_ENV=development ENV_FILE=./.env mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
@@ -25,7 +25,9 @@
     },
     "dependencies": {
         "bootstrap-vue": "^2.21.2",
+        "dotenv": "^10.0.0",
         "laravel-echo": "^1.11.3",
+        "mix-env-file": "^0.1.1",
         "moment": "^2.29.1",
         "portal-vue": "^2.1.7",
         "pusher-js": "^7.0.3",
