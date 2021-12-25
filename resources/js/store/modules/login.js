@@ -79,7 +79,6 @@ export default {
                             resolve(resp.data);
                         }
                     }).catch(err => {
-                    commit('LOGOUT');
                     reject(err);
                 })
             })

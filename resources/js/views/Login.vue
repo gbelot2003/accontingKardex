@@ -46,15 +46,14 @@ export default {
   methods: {
     onSubmit() {
       let data = {
-        email: this.email,
-        password: this.password,
+        email: this.form.email,
+        password: this.form.password,
       };
       this.$store
-        .dispatch("login/AUTH_REQUEST", data)
+        .dispatch('login/AUTH_REQUEST', data)
         .then((res) => {
           if (res.message === "invalid credentials") {
-            this.password = "";
-            this.snackbar = true;
+            this.form.password = "";
             this.text = res.message;
           } else {
             this.$router.push({ path: "dashboard" });
