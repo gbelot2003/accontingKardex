@@ -3,7 +3,7 @@
     <b-row align-h="center">
       <b-col cols="6">
         <b-card title="Login">
-          <b-form>
+          <b-form @submit.prevent="onSubmit">
             <b-form-group label="Email">
               <b-form-input
                 id="input-1"
@@ -38,10 +38,32 @@ export default {
   data() {
     return {
       form: {
-        email: "",
-        password: "",
+        email: "gbelot2003@hotmail.com",
+        password: "password",
       },
     };
+  },
+  methods: {
+    onSubmit() {
+      let data = {
+        email: this.email,
+        password: this.password,
+      };
+      this.$store
+        .dispatch("login/AUTH_REQUEST", data)
+        .then((res) => {
+          if (res.message === "invalid credentials") {
+            this.password = "";
+            this.snackbar = true;
+            this.text = res.message;
+          } else {
+            this.$router.push({ path: "dashboard" });
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    },
   },
 };
 </script>

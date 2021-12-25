@@ -1,6 +1,6 @@
 import axios from 'axios/dist/axios'
 //import server from '../env.dev'
-const server = process.env.APP_URL + "/api/"
+const server = `/api/`
 
 export default {
     namespaced: true,
