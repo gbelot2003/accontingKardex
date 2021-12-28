@@ -1,8 +1,8 @@
 <template>
   <div>
+    <navbar></navbar>
+    <br />
     <b-overlay :show="show" rounded="sm">
-      <navbar></navbar>
-      <br />
       <b-container fluid>
         <router-view />
       </b-container>

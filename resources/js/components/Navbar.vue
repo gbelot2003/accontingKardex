@@ -25,19 +25,19 @@
           </b-nav-form>
 
           <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
+            <b-dropdown-item href="#">{{ isLoged }}</b-dropdown-item>
             <b-dropdown-item href="#">ES</b-dropdown-item>
             <b-dropdown-item href="#">RU</b-dropdown-item>
             <b-dropdown-item href="#">FA</b-dropdown-item>
           </b-nav-item-dropdown>
 
-          <b-nav-item-dropdown right>
+          <b-nav-item-dropdown right v-if="isLoged">
             <!-- Using 'button-content' slot -->
             <template #button-content>
               <em>User</em>
             </template>
             <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+            <b-dropdown-item @click="doLogout">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
@@ -48,5 +48,28 @@
 <script>
 export default {
   name: "Navbar",
+  data() {
+    return {
+      visible: "",
+    };
+  },
+  mounted(){
+      if (this.isLoged === true){
+          this.visible = true
+      }
+  },
+  methods: {
+    doLogout() {
+      this.$store.dispatch("login/AUTH_LOGOUT").then(() => {
+        this.$router.push({ path: "/" });
+        this.visible = false;
+      });
+    },
+  },
+  computed: {
+    isLoged() {
+      return this.$store.getters["login/getIsLogedIn"]
+    },
+  },
 };
 </script>
