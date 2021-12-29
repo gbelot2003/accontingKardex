@@ -10,13 +10,20 @@ const routes = [
         path: '/',
         name: 'Login',
         component: Login,
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem('isLoggedIn')) {
+                next('/dashboard')
+            } else {
+                next()
+            }
+        }
     },
     {
         path: '/dashboard',
         name: 'Dashboard',
         component: Dashboard,
-        beforeEnter:(to, from, next) => {
-            if (localStorage.getItem('isLoggedIn')){
+        beforeEnter: (to, from, next) => {
+            if (localStorage.getItem('isLoggedIn')) {
                 next()
             } else {
                 next('/')
