@@ -10,26 +10,31 @@ export default {
         expires_at: localStorage.getItem('expires_at'),
         isLoggedIn: localStorage.getItem('isLoggedIn'),
         user: JSON.stringify(localStorage.getItem('user')),
+        showAnimation: null,
     },
     getters: {
+        getShowAnimation() {
+            return state.showAnimation
+        },
+
         getIsLogedIn(state, rootState) {
-            return state.isLoggedIn;
+            return state.isLoggedIn
         },
 
         getToken(state) {
-            return state.access_token;
+            return state.access_token
         },
 
         getAccessToken(state) {
-            return state.token_type + ' ' + state.access_token;
+            return state.token_type + ' ' + state.access_token
         },
 
         getExpires(state) {
-            return state.expires_at;
+            return state.expires_at
         },
 
         getUser(state) {
-            return state.user;
+            return state.user
         },
     },
     mutations: {
@@ -65,9 +70,17 @@ export default {
         CHANGE_MENU_STATE(state, payload) {
             state.manuPage = payload;
         },
+
+        ANIMATION_ON(state) {
+            state.showAnimation = true
+        },
+
+        ANIMATION_OFF(state) {
+            state.showAnimation = false
+        }
     },
     actions: {
-        AUTH_REQUEST: ({commit}, params) => {
+        AUTH_REQUEST: ({ commit }, params) => {
             return new Promise((resolve, reject) => {
                 const string = server + 'login';
                 axios.post(string, params)
@@ -79,12 +92,12 @@ export default {
                             resolve(resp.data);
                         }
                     }).catch(err => {
-                    reject(err);
-                })
+                        reject(err);
+                    })
             })
         },
 
-        GET_USER: async ({commit, getters}) => {
+        GET_USER: async ({ commit, getters }) => {
             let string = server + 'user';
             try {
                 axios.get(string, {
@@ -99,7 +112,7 @@ export default {
             }
         },
 
-        AUTH_LOGOUT: ({commit, getters}) => {
+        AUTH_LOGOUT: ({ commit, getters }) => {
             return new Promise((resolve, reject) => {
                 let string = server + 'logout';
                 axios.get(string, {
@@ -111,8 +124,8 @@ export default {
                         commit('LOGOUT');
                         resolve(resp);
                     }).catch(err => {
-                    reject(err);
-                })
+                        reject(err);
+                    })
             })
         },
     }
