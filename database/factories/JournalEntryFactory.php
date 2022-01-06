@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use App\Models\Account;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,9 +16,10 @@ class JournalEntryFactory extends Factory
     public function definition()
     {
         return [
-            'code_id' => Account::factory()->create()->code,
+            'code_id' => Account::factory()->create()->code_id,
             'detail' => $this->faker->sentence(), 
-            'debit' => $this->faker->randomFloat(2, 10)
+            'debit' => $this->faker->randomFloat(2, 10),
+            'user_id' => User::factory()->create()->id
         ];
     }
 
