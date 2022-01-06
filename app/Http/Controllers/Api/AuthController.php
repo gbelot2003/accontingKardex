@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
+
+
     public function logout()
     {
         auth('api')->user()->tokens->each(function ($token, $key) {
@@ -18,6 +20,7 @@ class AuthController extends Controller
         return response()->json('Logged out', 200);
     }
 
+    
     public function login(Request $request)
     {
 
@@ -29,6 +32,15 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         $checkStatus = User::where('email', $request->email)->first();
+
+        if ($checkStatus != null) {
+
+            // verificamos el estado del usuario
+            if ($checkStatus->status == false) {
+                return \response()->json("error",
+                    422);
+            }
+        }
 
         if (auth()->attempt($credentials)) {
             return $this->authAttemps($request);

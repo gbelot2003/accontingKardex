@@ -9,7 +9,7 @@ class Account extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id'];
+    protected $fillable = ['category_id', 'name', 'code', 'description'];
 
     /** Relacion con categorias */
     public function category()
