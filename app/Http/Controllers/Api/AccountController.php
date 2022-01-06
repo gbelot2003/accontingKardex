@@ -13,7 +13,7 @@ class AccountController extends Controller
         
         $account = Account::create($request->validate([
             'category_id' => 'required|integer',
-            'code' => 'required|integer|starts_with:' . $request->get('category_id'),
+            'code_id' => 'required|integer|starts_with:' . $request->get('category_id'),
             'name' => 'required',
             'description' => 'string|nullable'
         ]));

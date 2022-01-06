@@ -17,7 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->foreignId('category_id');
             $table->string('name');
-            $table->bigInteger('code');
+            $table->bigInteger('code_id');
             $table->text('description')->nullable();
             $table->timestamps();
         });

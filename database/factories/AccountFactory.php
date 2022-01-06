@@ -19,7 +19,7 @@ class AccountFactory extends Factory
             'category_id' => $category,
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(),
-            'code' => $category . rand(1, 5)
+            'code_id' => $category . rand(1, 5)
         ];
     }
 }

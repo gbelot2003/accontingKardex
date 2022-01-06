@@ -34,7 +34,7 @@ class AccountTest extends TestCase
         return array_merge([
             'name' => $this->faker->word,
             'category_id' => 1,
-            'code' => 15,
+            'code_id' => 15,
             'description' => $this->faker->sentence()
         ], $override);
     }
@@ -49,11 +49,11 @@ class AccountTest extends TestCase
     }
 
     /** @test */
-    public function an_account_must_have_a_code()
+    public function an_account_must_have_a_code_id()
     {
         Passport::actingAs($this->user);
 
-        $this->json('post', 'api/v1/account', $this->validateFields(['code' => '']))
+        $this->json('post', 'api/v1/account', $this->validateFields(['code_id' => '']))
         ->assertStatus(422);
     }
 
@@ -76,26 +76,27 @@ class AccountTest extends TestCase
     }
 
     /** @test */
-    public function code_must_be_a_number()
+    public function code_id_must_be_a_number()
     {
         Passport::actingAs($this->user);
         
-        $this->json('post', 'api/v1/account', $this->validateFields(['code' => 'abc']))
+        $this->json('post', 'api/v1/account', $this->validateFields(['code_id' => 'abc']))
         ->assertStatus(422);
     }
 
     /** @test */
-    public function code_must_beguin_with_category_number()
+    public function code_id_must_beguin_with_category_number()
     {
         Passport::actingAs($this->user);
 
-        $this->json('post', 'api/v1/account', $this->validateFields(['code' => '251']))
+        $this->json('post', 'api/v1/account', $this->validateFields(['code_id' => '251']))
         ->assertStatus(422);
     }
 
     /** @test */
     public function an_auth_user_can_create_an_account()
     {
+       $this->withExceptionHandling();
        
         Passport::actingAs($this->user);
 
@@ -104,7 +105,7 @@ class AccountTest extends TestCase
     }
 
     /** @test */
-    public function an_unidentify_user_cant_create_account()
+    public function an_unidentify_user_cannot_create_account()
     {
         $account = Account::factory()->make();
 
