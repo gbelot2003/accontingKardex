@@ -10,10 +10,4 @@ class AccountTest extends TestCase
 {
 
     use RefreshDatabase, WithFaker;
-
-    /** @test */
-    public function can_create_an_account()
-    {
-        
-    }
 }
