@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\AccountController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ItemsController;
+use App\Http\Controllers\Api\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,4 +27,6 @@ Route::prefix('v1')->middleware(['auth:api'])->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
     
     Route::post('account', [AccountController::class, 'store']);
+
+    Route::post('items', [ItemsController::class, 'store']);
 });
