@@ -29,6 +29,9 @@ class ItemTest extends TestCase
         
         $this->json('post', 'api/v1/items', $attr)
             ->assertStatus(200);
+
+        $this->assertDatabaseHas('items', ['name' => $attr['name']]);
+
         
     }
 }
