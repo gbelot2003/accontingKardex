@@ -1,6 +1,6 @@
 import axios from 'axios/dist/axios'
 //import server from '../env.dev'
-const server = `/api/`
+const server = `/api/v1/`
 
 export default {
     namespaced: true,
