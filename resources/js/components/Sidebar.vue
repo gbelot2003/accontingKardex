@@ -1,62 +1,63 @@
 <template>
-  <nav id="sidebar" class="bg-dark">
-    <ul class="list-unstyled components">
-      <p>Dummy Heading</p>
-      <li class="active">
-        <a
-          href="#homeSubmenu"
-          data-toggle="collapse"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          >Home</a
-        >
-        <ul class="collapse list-unstyled" id="homeSubmenu">
-          <li>
-            <a href="#">Home 1</a>
-          </li>
-          <li>
-            <a href="#">Home 2</a>
-          </li>
-          <li>
-            <a href="#">Home 3</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">About</a>
-      </li>
-      <li>
-        <a
-          href="#pageSubmenu"
-          data-toggle="collapse"
-          aria-expanded="false"
-          class="dropdown-toggle"
-          >Pages</a
-        >
-        <ul class="collapse list-unstyled" id="pageSubmenu">
-          <li>
-            <a href="#">Page 1</a>
-          </li>
-          <li>
-            <a href="#">Page 2</a>
-          </li>
-          <li>
-            <a href="#">Page 3</a>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Portfolio</a>
-      </li>
-      <li>
-        <a href="#">Contact</a>
-      </li>
-    </ul>
+  <nav id="sidebar1" class="bg-dark" v-if="isLoged">
+    <div class="container">
+      <ul class="sidebar-panel-nav">
+        <li>
+          <router-link to="/">
+            <b-icon icon="house-fill"></b-icon>
+            Dashboard
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/about">About</router-link>
+        </li>
+        <li>
+          <router-link to="/contact">Contact Us</router-link>
+        </li>
+      </ul>
+    </div>
   </nav>
 </template>
 
 <script>
-    export default {
-        name: 'sidebar'
+export default {
+  name: "sidebar",
+  data() {
+    return {
+      visible: "",
     };
+  },
+  mounted() {
+    if (this.isLoged === true) {
+      this.visible = true;
+    }
+  },
+  computed: {
+    isLoged() {
+      return this.$store.getters["login/getIsLogedIn"];
+    },
+  },
+};
 </script>
+
+<style>
+#sidebar1 {
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
+  padding-top: 2rem;
+}
+
+ul.sidebar-panel-nav {
+  list-style-type: none;
+  padding: 0%;
+}
+
+ul.sidebar-panel-nav > li > a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  display: block;
+  padding-bottom: 1rem;
+}
+</style>

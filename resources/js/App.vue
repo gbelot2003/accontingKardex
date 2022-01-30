@@ -37,9 +37,5 @@ export default {
   margin-top: 20px;
 }
 
-#sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 100vh;
-}
+
 </style>
