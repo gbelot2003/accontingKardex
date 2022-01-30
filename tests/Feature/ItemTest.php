@@ -25,7 +25,6 @@ class ItemTest extends TestCase
             'name' => $this->faker->word,
             'description' => $this->faker->sentence,
         ];
-
         
         $this->json('post', 'api/v1/items', $attr)
             ->assertStatus(200);
